@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Manager</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+    <h1>Sign Up</h1>
+    <div>
+
+        <form id="form" action="http://localhost:8081/users/register" method="post"
+            onsubmit="return validarFormulario()">
+            <label for="name">FullName:</label>
+            <input type="text" name="fullname" id="fullname" placeholder="Full Name" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <br>
+            <label for="phone">Phone:</label>
+            <input type="tel" name="phone" id="phone" placeholder="Phone" required pattern="[0-9]{9}">
+            <br>
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address" placeholder="Address" required>
+            <br>
+            <label for="fechanacimiento">Fecha Nacimiento:</label>
+            <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+            <br>
+            <label for="user">Usuario:</label>
+            <input type="text" name="username" id="username" placeholder="Usuario" id="username" required>
+            <br>
+            <label for="user">Contraseña:</label>
+            <input type="password" name="password" id="password" placeholder="Contraseña" required>
+            <br>
+
+            <button id="formi" type="submit">Enviar</button>
+
+
+        </form>
+    </div>
+
+
+</body>
+
+</html>
