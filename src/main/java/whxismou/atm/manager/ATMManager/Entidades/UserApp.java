@@ -1,6 +1,6 @@
 package whxismou.atm.manager.ATMManager.Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -30,7 +30,8 @@ public class UserApp {
     private String address;
     private String username;
     private String password;
-    private Date fechaNacimiento;
+
+    private LocalDate fechaNacimiento;
 
     @OneToMany(mappedBy = "user")
     private List<Transaction> transactions;

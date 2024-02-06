@@ -29,8 +29,9 @@ public class UserAppController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveUser(@RequestBody UserApp user) {
+
         userService.saveUser(user);
     }
 
