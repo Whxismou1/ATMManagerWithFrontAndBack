@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import whxismou.atm.manager.ATMManager.Entidades.UserApp;
@@ -14,12 +15,20 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void saveUser(UserApp user) {
+
+        String encryptedPass = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPass);
+
         userRepository.save(user);
     }
 
     public UserApp getUserByUsername(String username) {
+
         return userRepository.findByUsername(username);
     }
 

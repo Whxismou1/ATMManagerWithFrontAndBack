@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         // Mostrar mensaje de éxito
         alert("Usuario registrado exitosamente");
+        window.location.href = "../html/login.html";
       } else {
         // Mostrar mensaje de error si la solicitud falla
         alert("Error al registrar usuario");

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import whxismou.atm.manager.ATMManager.Entidades.UserApp;
 import whxismou.atm.manager.ATMManager.Services.UserService;
 
-// @CrossOrigin(origins = "http://localhost:8082")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 @RequestMapping("/users")
@@ -29,19 +30,33 @@ public class UserAppController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveUser(@RequestBody UserApp user) {
 
         userService.saveUser(user);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+    @GetMapping("/login")
+    public ResponseEntity<?> getUserByUsernameAndPassword(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password) {
+
         UserApp user = userService.getUserByUsername(username);
         if (user != null) {
-            return ResponseEntity.ok(user);
+            // Verificar si la contraseña coincide
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                // Si la contraseña coincide, devuelve el usuario como respuesta
+                return ResponseEntity.ok(user);
+            } else {
+                // Si la contraseña no coincide, devuelve un mensaje de error
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            // Si el usuario no se encuentra, devuelve un mensaje de error
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
         }
     }
 
