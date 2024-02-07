@@ -1,0 +1,85 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh; /* Ajuste para asegurar que el fondo se muestre correctamente */
+    background: url(../images/bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Ajuste para fijar la imagen de fondo */
+}
+
+.wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    display: none; /* Ocultar el título "Main Menu" */
+}
+
+/* Estilos para el menú principal */
+.main-menu {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2; /* Asegurar que el menú esté por encima de la imagen de fondo */
+}
+
+.main-menu ul {
+    list-style: none;
+    display: inline-block;
+}
+
+.main-menu ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.main-menu ul li:last-child {
+    margin-right: 0;
+}
+
+.main-menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.main-menu ul li a:hover {
+    color: #f0f0f0; /* Cambia el color del texto al pasar el ratón sobre el enlace */
+}
+
+.menuRegister {
+    display: block;
+    margin: auto; /* Centra horizontalmente */
+    margin-bottom: 5px;
+    width: 200px; /* Ancho ajustado */
+    height: 40px; /* Altura ajustada */
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px; /* Redondea los bordes */
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 14px; /* Tamaño de fuente reducido */
+    color: #333;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.menuRegister:hover {
+    background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
