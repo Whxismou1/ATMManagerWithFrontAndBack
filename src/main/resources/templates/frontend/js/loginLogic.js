@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (response.ok) {
         // Usuario autenticado correctamente, redirigir al home
-        window.location.href = "../html/home.html";
+        const userData = await response.json();
+        window.location.href = `../html/home.html?username=${encodeURIComponent(usernameIntroduced)}`;
       } else if (response.status === 401) {
         // Credenciales incorrectas
+
         alert("Credenciales incorrectas");
       } else if (response.status === 404) {
         // Usuario no encontrado

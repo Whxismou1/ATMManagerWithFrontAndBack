@@ -33,7 +33,4 @@ public class UserApp {
 
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "user")
-    private List<Transaction> transactions;
-
 }

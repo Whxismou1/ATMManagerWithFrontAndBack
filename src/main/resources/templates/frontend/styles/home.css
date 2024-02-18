@@ -1,0 +1,27 @@
+.transactions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.transaction-header {
+    display: flex;
+    font-weight: bold;
+    width: 100%;
+    justify-content: center;
+    gap: 550px;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+}
+
+.transaction div {
+    flex: 1;
+    text-align: center;
+}

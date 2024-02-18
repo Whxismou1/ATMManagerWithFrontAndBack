@@ -35,18 +35,17 @@ public class UserAppController {
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveUser(@RequestBody UserApp user) {
-
         userService.saveUser(user);
     }
 
     @GetMapping("/login")
-    public ResponseEntity<?> getUserByUsernameAndPassword(
-            @RequestParam("username") String username,
+    public ResponseEntity<?> getUserByUsernameAndPassword(@RequestParam("username") String username,
             @RequestParam("password") String password) {
 
         UserApp user = userService.getUserByUsername(username);
         if (user != null) {
             // Verificar si la contraseña coincide
+
             if (passwordEncoder.matches(password, user.getPassword())) {
                 // Si la contraseña coincide, devuelve el usuario como respuesta
                 return ResponseEntity.ok(user);
