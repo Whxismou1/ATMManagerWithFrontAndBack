@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
+    const initialAmmountValue = data["balance"];
+
+    if (initialAmmountValue === undefined || initialAmmountValue === "") {
+      data["balance"] = 0;
+    }
+
     const jsonOb = JSON.stringify(data);
 
     try {
@@ -12,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: jsonOb,
       });
+
+      console.log(jsonOb);
 
       if (response.ok) {
         // Mostrar mensaje de éxito

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="../js/registerLogic.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <div class="wrapper">
         <form id="form" method="post">
@@ -30,7 +32,8 @@
             </div>
             <div class="input-box">
                 <label for="fechaNacimiento">Fecha de nacimiento:</label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de Nacimiento"
+                    required>
             </div>
             <div class="input-box">
                 <label for="username">Usuario:</label>
@@ -40,11 +43,19 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password" id="password" placeholder="Contraseña" required>
             </div>
+
+            <div class="input-box">
+                <label for="initialAmmount">Initial Ammount(Optional)</label>
+                <input type="number" name="balance" id="initialAmmount" placeholder="1000">
+            </div>
+
+
             <button id="formi" type="submit">Enviar</button>
         </form>
         <div class="login-link">
-          <p>¿Ya tienes una cuenta? <a href="loginForm.html">Iniciar sesión</a></p>
-      </div>
+            <p>¿Ya tienes una cuenta? <a href="loginForm.html">Iniciar sesión</a></p>
+        </div>
     </div>
 </body>
+
 </html>

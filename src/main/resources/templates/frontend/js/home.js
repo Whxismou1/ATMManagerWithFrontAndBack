@@ -63,13 +63,13 @@ async function addTransaction(transactionData) {
     });
 
     if (response.ok) {
-      alert("Transacción realizada con éxito");
+      // alert("Transacción realizada con éxito");
     } else {
       console.error("Error al realizar la transacción:", response.statusText);
-      alert("Error al realizar la transacción");
+      // alert("Error al realizar la transacción");
     }
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
+    // console.error("Error al enviar la solicitud:", error);
     throw error;
   }
 }

@@ -21,4 +21,9 @@ public class TransactionService {
         return (List) transactionRepository.findAllByUsername(username);
     }
 
+    public Double getBalance(String username) {
+
+        return Double.parseDouble(transactionRepository.getBalance(username));
+    }
+
 }

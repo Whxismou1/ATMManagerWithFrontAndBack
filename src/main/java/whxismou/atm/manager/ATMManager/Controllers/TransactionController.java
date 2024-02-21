@@ -27,6 +27,11 @@ public class TransactionController {
         return transactionService.getAllTransactions(username);
     }
 
+    @GetMapping("/balance/{username}")
+    public Double getBalance(@PathVariable String username) {
+        return transactionService.getBalance(username);
+    }
+
     @PostMapping()
     public ResponseEntity<?> saveTransaction(@RequestBody Transaction transaction) {
         Transaction savedTransaction = transactionService.saveTransaction(transaction);
