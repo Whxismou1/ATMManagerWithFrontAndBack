@@ -34,8 +34,11 @@ public class UserAppController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void saveUser(@RequestBody UserApp user) {
+    public ResponseEntity<?> saveUser(@RequestBody UserApp user) {
         userService.saveUser(user);
+        userService.sendVerificationEmail(user);
+        return ResponseEntity
+                .ok("Usuario registrado. Por favor, verifica tu correo electrónico para activar tu cuenta.");
     }
 
     @GetMapping("/login")

@@ -1,7 +1,7 @@
 package whxismou.atm.manager.ATMManager.Entidades;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,5 +33,6 @@ public class UserApp {
     private String balance;
 
     private LocalDate fechaNacimiento;
-
+    private String verificationToken;
+    private LocalDateTime tokenExpiration;
 }
