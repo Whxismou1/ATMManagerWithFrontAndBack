@@ -35,9 +35,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         transactionDate: new Date().toISOString(),
       };
 
-
       formMoves.reset();
       try {
+        const currentBalance = parseFloat(
+          document.getElementById("balance").innerText
+        );
+
+        const transactionAmount = parseFloat(amount);
+
+        if (
+          transactionType === "WITHDRAWAL" &&
+          currentBalance < transactionAmount
+        ) {
+          throw new Error(
+            "No hay suficiente saldo para realizar esta transacción"
+          );
+        }
+
         // Agregar la transacción antes de obtener las transacciones actualizadas
         await addTransaction(transactionData);
         // Obtener las transacciones actualizadas después de agregar la nueva transacción
@@ -45,8 +59,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         updateBalance(username, amount, transactionType);
         getBalance(username);
       } catch (error) {
-        console.error("Error al agregar la transacción:", error);
-        alert("Error al agregar la transacción");
+        console.error("Error al agregar la transacción:", error.message);
+        alert(error.message);
       } finally {
         // Habilitar los botones nuevamente después de realizar la solicitud
         document.getElementById("withdrawBtn").disabled = false;
@@ -134,11 +148,11 @@ async function getBalance(username) {
   }
 }
 
-async function updateBalance(username, balance, transactionType) {
+async function updateBalance(username, ammount, transactionType) {
   if (transactionType === "WITHDRAWAL") {
-    balance = -balance;
+    ammount = -ammount;
   }
-  
+
   const response = await fetch(
     `http://localhost:8081/transactions/balance/${username}`,
     {
@@ -146,7 +160,7 @@ async function updateBalance(username, balance, transactionType) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: balance.toString()
+      body: ammount.toString(),
     }
   );
 
