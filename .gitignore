@@ -39,3 +39,6 @@ target/
 .mvn
 mvnw
 mvnw.cmd
+
+#
+src/test/

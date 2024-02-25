@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (username) {
     document.getElementById("username").innerText = username;
-
+    getBalance(username);
     getTransactions(username);
 
     const formMoves = document.getElementById("formMoves");
@@ -35,11 +35,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         transactionDate: new Date().toISOString(),
       };
 
+
+      formMoves.reset();
       try {
         // Agregar la transacción antes de obtener las transacciones actualizadas
         await addTransaction(transactionData);
         // Obtener las transacciones actualizadas después de agregar la nueva transacción
         getTransactions(username);
+        updateBalance(username, amount, transactionType);
+        getBalance(username);
       } catch (error) {
         console.error("Error al agregar la transacción:", error);
         alert("Error al agregar la transacción");
@@ -93,9 +97,9 @@ async function getTransactions(username) {
 
 function renderTransactions(transactions) {
   const transactionsContainer = document.querySelector(".transactions");
-  const transactionHeader = transactionsContainer.querySelector(
-    ".transaction-header"
-  );
+
+  // Limpiar el contenedor antes de agregar las nuevas transacciones
+  transactionsContainer.innerHTML = "";
 
   transactions.forEach((transaction) => {
     const transactionDiv = document.createElement("div");
@@ -114,9 +118,42 @@ function renderTransactions(transactions) {
     dateDiv.innerText = date;
     transactionDiv.appendChild(dateDiv);
 
-    transactionsContainer.insertBefore(
-      transactionDiv,
-      transactionHeader.nextSibling
-    );
+    transactionsContainer.appendChild(transactionDiv);
   });
+}
+
+async function getBalance(username) {
+  const response = await fetch(
+    `http://localhost:8081/transactions/balance/${username}`
+  );
+
+  if (response.ok) {
+    const balance = await response.text();
+    // alert("Balance: ", balance);
+    document.getElementById("balance").innerText = balance;
+  }
+}
+
+async function updateBalance(username, balance, transactionType) {
+  if (transactionType === "WITHDRAWAL") {
+    balance = -balance;
+  }
+  
+  const response = await fetch(
+    `http://localhost:8081/transactions/balance/${username}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: balance.toString()
+    }
+  );
+
+  if (response.ok) {
+    alert("Balance actualizado con éxito");
+    getBalance(username);
+  } else {
+    alert("Error al actualizar el balance");
+  }
 }

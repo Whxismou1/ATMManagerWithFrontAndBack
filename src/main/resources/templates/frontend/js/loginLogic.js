@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (response.ok) {
         // Usuario autenticado correctamente, redirigir al home
-        const userData = await response.json();
+        // const userData = await response.json();
 
         window.location.href = `../html/home.html?username=${encodeURIComponent(
           usernameIntroduced

@@ -18,23 +18,24 @@
 
         <section class="balance">
             <h2>Saldo Actual</h2>
-            <p>Saldo: $1000</p>
+            <p>Saldo: <span id="balance">$1000</span></p>
         </section>
 
         <h2>Últimos movimientos</h2>
+        <div class="transaction-header">
+            <div>Tipo de Transacción</div>
+            <div>Cantidad</div>
+            <div>Fecha Movimiento</div>
+        </div>
         <section class="transactions">
-            <div class="transaction-header">
-                <div>Tipo de Transacción</div>
-                <div>Cantidad</div>
-                <div>Fecha Movimiento</div>
-            </div>
+
         </section>
 
         <section class="actions">
             <h2>Acciones</h2>
             <form id="formMoves">
                 <label for="depositAmount">Cantidad a depositar:</label>
-                <input placeholder="200" type="number" id="depositAmount" name="depositAmount" required>
+                <input placeholder="200" type="number" id="depositAmount" name="depositAmount" min="1" required>
                 <button id="withdrawBtn" type="submit">Retirar Dinero</button>
                 <button id="depositBtn" type="submit">Depositar dinero</button>
             </form>
