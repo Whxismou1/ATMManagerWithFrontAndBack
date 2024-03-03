@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const jsonOb = JSON.stringify(data);
 
+    console.log(jsonOb);
+
     try {
       const response = await fetch("http://localhost:8081/users/register", {
         method: "POST",
@@ -19,11 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
         body: jsonOb,
       });
 
-      console.log(jsonOb);
-
       if (response.ok) {
         // Mostrar mensaje de éxito
         alert("Usuario registrado exitosamente");
+        const responseJson = await response.text();
+        console.log(responseJson);
+        alert(responseJson.message);
         window.location.href = "../html/loginForm.html";
       } else {
         // Mostrar mensaje de error si la solicitud falla
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       console.error("Error al enviar la solicitud:", error);
       // Mostrar mensaje de error si ocurre un error en la solicitud
-      alert("Error al enviar la solicitud");
+      alert("Error al enviar la solicitud: " + error.message);
     }
   });
 });

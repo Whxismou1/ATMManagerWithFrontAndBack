@@ -32,7 +32,13 @@ public class UserApp {
 
     private String balance;
 
+    private boolean isActive;
     private LocalDate fechaNacimiento;
     private String verificationToken;
     private LocalDateTime tokenExpiration;
+
+    public boolean getIsActive() {
+        return this.isActive;
+    }
+
 }

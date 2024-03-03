@@ -18,11 +18,11 @@ public class MailConfig {
         mailSender.setHost(dotenv.get("MAIL_HOST"));
         mailSender.setPort(Integer.parseInt(dotenv.get("MAIL_PORT"))); // Cambia el puerto según tu configuración
         mailSender.setUsername(dotenv.get("MAIL_USER")); // Cambia esto por tu dirección de correo electrónico
-        mailSender.setPassword(dotenv.get("MAIL_PASSWORD")); // Cambia esto por tu contraseña de correo electrónico
+        mailSender.setPassword(dotenv.get("MAIL_PASS")); // Cambia esto por tu contraseña de correo electrónico
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.auth", "true");   
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
 

@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import whxismou.atm.manager.ATMManager.Entidades.UserApp;
 import whxismou.atm.manager.ATMManager.Repositories.UserRepository;
 
@@ -43,6 +44,10 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public UserApp getUserByVerificationToken(String token) {
+        return userRepository.findByVerificationToken(token);
+    }
+
     public ArrayList<UserApp> getAllUsers() {
         return (ArrayList<UserApp>) userRepository.findAll();
     }
@@ -52,15 +57,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-
     public void sendVerificationEmail(UserApp user) {
         String token = generateToken();
         user.setVerificationToken(token);
         user.setTokenExpiration(LocalDateTime.now().plusHours(24)); // Token expira en 24 horas
-        userRepository.save(user);
+
+        this.saveUser(user);
 
         String subject = "Verifica tu cuenta";
-        String confirmationUrl = "http://tuapp.com/confirmar?token=" + token;
+        Dotenv dotenv = Dotenv.load();
+
+        String confirmationUrl = dotenv.get("MAIL_WEB_HOST") + token;
         String message = "Por favor, haz clic en el siguiente enlace para confirmar tu cuenta: " + confirmationUrl;
 
         sendEmail(user.getEmail(), subject, message);
@@ -73,7 +80,6 @@ public class UserService {
         message.setText(text);
         javaMailSender.send(message);
     }
-
 
     private String generateToken() {
         return UUID.randomUUID().toString();

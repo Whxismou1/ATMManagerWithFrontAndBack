@@ -1,4 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
+  function showErrorModal(message) {
+    const modal = document.getElementById("myModal");
+    const modalMessage = document.getElementById("modal-message");
+    modalMessage.textContent = message;
+    modal.style.display = "block";
+  }
+
+  // Ocultar el modal
+  function hideErrorModal() {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  }
+
+  // Evento para cerrar el modal haciendo clic en la 'x'
+  document.querySelector(".close").addEventListener("click", hideErrorModal);
+
+  // Evento para cerrar el modal haciendo clic fuera del modal
+  window.addEventListener("click", function (event) {
+    const modal = document.getElementById("myModal");
+    if (event.target === modal) {
+      hideErrorModal();
+    }
+  });
+
   document.querySelector("#form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -19,8 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
         )}`;
       } else if (response.status === 401) {
         // Credenciales incorrectas
+        const resText = await response.text();
 
-        alert("Credenciales incorrectas");
+        if (resText === "Usuario no verificado") {
+          console.log("Usuario no verificado");
+        }
+        showErrorModal("Credenciales incorrectas");
+        // alert("Credenciales incorrectas");
       } else if (response.status === 404) {
         // Usuario no encontrado
         alert("Usuario no encontrado");
