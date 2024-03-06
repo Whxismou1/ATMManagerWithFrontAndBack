@@ -27,12 +27,16 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void saveUser(UserApp user) {
-
-        String encryptedPass = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptedPass);
-
         userRepository.save(user);
     }
+
+    // public void saveUser(UserApp user) {
+
+    // String encryptedPass = passwordEncoder.encode(user.getPassword());
+    // user.setPassword(encryptedPass);
+
+    // userRepository.save(user);
+    // }
 
     public UserApp getUserByUsername(String username) {
 
@@ -62,7 +66,9 @@ public class UserService {
         user.setVerificationToken(token);
         user.setTokenExpiration(LocalDateTime.now().plusHours(24)); // Token expira en 24 horas
 
-        this.saveUser(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        this.userRepository.save(user);
 
         String subject = "Verifica tu cuenta";
         Dotenv dotenv = Dotenv.load();

@@ -35,7 +35,6 @@ public class UserAppController {
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> saveUser(@RequestBody UserApp user) {
-        // userService.saveUser(user);
         userService.sendVerificationEmail(user);
         return ResponseEntity
                 .ok("Usuario registrado. Por favor, verifica tu correo electrónico para activar tu cuenta.");
@@ -58,7 +57,7 @@ public class UserAppController {
                 return ResponseEntity.ok(user);
             } else {
                 // Si la contraseña no coincide, devuelve un mensaje de error
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Password incorrecta");
             }
         } else {
             // Si el usuario no se encuentra, devuelve un mensaje de error

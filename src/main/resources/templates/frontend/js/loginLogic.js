@@ -47,8 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (resText === "Usuario no verificado") {
           console.log("Usuario no verificado");
+        } else if (resText === "Password incorrecta") {
+          showErrorModal("Credenciales incorrectas");
         }
-        showErrorModal("Credenciales incorrectas");
+
+        // alert(resText);
+
         // alert("Credenciales incorrectas");
       } else if (response.status === 404) {
         // Usuario no encontrado
