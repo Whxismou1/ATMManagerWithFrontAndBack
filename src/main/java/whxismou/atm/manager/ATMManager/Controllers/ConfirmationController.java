@@ -26,6 +26,7 @@ public class ConfirmationController {
         if (user != null && user.getTokenExpiration().isAfter(LocalDateTime.now())) {
             user.setTokenExpiration(null);
             user.setActive(true);
+            user.setVerificationToken(null);
             this.userService.saveUser(user);
             model.addAttribute("message", "Cuenta verificada");
             return "confirmSuccess"; // Nombre de la vista HTML

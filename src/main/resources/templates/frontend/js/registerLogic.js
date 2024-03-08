@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const jsonOb = JSON.stringify(data);
 
-    console.log(jsonOb);
+    // console.log(jsonOb);
 
     try {
       const response = await fetch("http://localhost:8081/users/register", {
@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: jsonOb,
       });
-
+      
       if (response.ok) {
         // Mostrar mensaje de éxito
         alert("Usuario registrado exitosamente");
-        const responseJson = await response.text();
-        console.log(responseJson);
-        alert(responseJson.message);
+        // const responseJson = await response.text();
+        // console.log(responseJson);
+        // alert(responseJson.message);
         window.location.href = "../html/loginForm.html";
       } else {
         // Mostrar mensaje de error si la solicitud falla

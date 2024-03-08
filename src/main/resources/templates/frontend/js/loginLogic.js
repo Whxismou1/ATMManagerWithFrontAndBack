@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const resText = await response.text();
 
         if (resText === "Usuario no verificado") {
-          console.log("Usuario no verificado");
+          showErrorModal("Usuario no verificado");
         } else if (resText === "Password incorrecta") {
           showErrorModal("Credenciales incorrectas");
         }

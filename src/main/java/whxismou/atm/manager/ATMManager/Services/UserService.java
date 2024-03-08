@@ -26,6 +26,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @SuppressWarnings("null")
     public void saveUser(UserApp user) {
         userRepository.save(user);
     }
@@ -66,6 +67,8 @@ public class UserService {
         user.setVerificationToken(token);
         user.setTokenExpiration(LocalDateTime.now().plusHours(24)); // Token expira en 24 horas
 
+        // user.setNumeroCuenta(getRandomCountNumber(token));
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         this.userRepository.save(user);
@@ -77,6 +80,22 @@ public class UserService {
         String message = "Por favor, haz clic en el siguiente enlace para confirmar tu cuenta: " + confirmationUrl;
 
         sendEmail(user.getEmail(), subject, message);
+    }
+
+    private String getRandomCountNumber(String token) {
+        StringBuilder sb = new StringBuilder();
+
+        
+        for (int i = 0; i < token.length(); i++) {
+            
+        }
+
+
+
+
+
+
+        return sb.toString();
     }
 
     private void sendEmail(String to, String subject, String text) {
