@@ -37,7 +37,7 @@ public class UserApp {
     private String verificationToken;
     private LocalDateTime tokenExpiration;
 
-    // private String numeroCuenta;
+    private String numeroCuenta;
 
     public boolean getIsActive() {
         return this.isActive;

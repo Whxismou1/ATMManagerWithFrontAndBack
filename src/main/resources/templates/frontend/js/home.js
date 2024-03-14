@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (username) {
     document.getElementById("username").innerText = username;
+    getNumCuenta(username);
     getBalance(username);
     getTransactions(username);
 
@@ -169,5 +170,17 @@ async function updateBalance(username, ammount, transactionType) {
     getBalance(username);
   } else {
     alert("Error al actualizar el balance");
+  }
+}
+
+async function getNumCuenta(username) {
+  const response = await fetch(
+    `http://localhost:8081/users/numCuenta?username=${username}`
+  );
+
+  if (response.ok) {
+    const numCuenta = await response.text();
+    console.log("numCuenta: ", numCuenta);
+    document.getElementById("iban").innerText = numCuenta;
   }
 }

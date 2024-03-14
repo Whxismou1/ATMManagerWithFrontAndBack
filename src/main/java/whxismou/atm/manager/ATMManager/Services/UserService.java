@@ -31,14 +31,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // public void saveUser(UserApp user) {
-
-    // String encryptedPass = passwordEncoder.encode(user.getPassword());
-    // user.setPassword(encryptedPass);
-
-    // userRepository.save(user);
-    // }
-
     public UserApp getUserByUsername(String username) {
 
         return userRepository.findByUsername(username);
@@ -67,7 +59,7 @@ public class UserService {
         user.setVerificationToken(token);
         user.setTokenExpiration(LocalDateTime.now().plusHours(24)); // Token expira en 24 horas
 
-        // user.setNumeroCuenta(getRandomCountNumber(token));
+        user.setNumeroCuenta(getRandomAccountNumber(token));
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -82,18 +74,21 @@ public class UserService {
         sendEmail(user.getEmail(), subject, message);
     }
 
-    private String getRandomCountNumber(String token) {
+    private String getRandomAccountNumber(String token) {
         StringBuilder sb = new StringBuilder();
 
-        
         for (int i = 0; i < token.length(); i++) {
-            
+            char actualChar = token.charAt(i);
+            if (Character.isDigit(actualChar)) {
+                sb.append(actualChar);
+            }
         }
 
-
-
-
-
+        if (sb.length() < 20) {
+            for (int i = 0; i < 20 - sb.length(); i++) {
+                sb.append((int) (Math.random() * 10));
+            }
+        }
 
         return sb.toString();
     }

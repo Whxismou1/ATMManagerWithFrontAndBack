@@ -1,6 +1,5 @@
 package whxismou.atm.manager.ATMManager.Repositories;
 
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +13,4 @@ public interface UserRepository extends CrudRepository<UserApp, Long> {
     UserApp findByUsername(String username);
 
     UserApp findByVerificationToken(String token);
-
-
 }

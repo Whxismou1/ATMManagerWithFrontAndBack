@@ -65,6 +65,17 @@ public class UserAppController {
         }
     }
 
+    @GetMapping("/numCuenta")
+    public ResponseEntity<?> getNumCuentaByUsername (@RequestParam("username") String username) {
+        UserApp user = userService.getUserByUsername(username);
+        if(user != null) {
+            return ResponseEntity.ok(user.getNumeroCuenta());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
+    }
+
+
     @GetMapping()
     public ArrayList<UserApp> getAllUsers() {
         return userService.getAllUsers();
