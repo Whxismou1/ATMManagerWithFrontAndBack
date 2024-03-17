@@ -38,9 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       formMoves.reset();
       try {
-        const currentBalance = parseFloat(
-          document.getElementById("balance").innerText
-        );
+        const currentBalance = getBalance(username);
 
         const transactionAmount = parseFloat(amount);
 
@@ -143,9 +141,9 @@ async function getBalance(username) {
   );
 
   if (response.ok) {
-    const balance = await response.text();
-    // alert("Balance: ", balance);
-    document.getElementById("balance").innerText = balance;
+    const balance = parseFloat(await response.text());
+
+    document.getElementById("balance").innerText = balance.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
   }
 }
 
